@@ -36,7 +36,23 @@
 
 主要涉及到两组`header`字段：`Etag`和`If-None-Match`、`Last-Modified`和`if-modified-since`。
 
-https://www.jb51.net/article/251857.htm
+#### 3.1 ETag 和 If-None-Match
+
+`ETag/If-None-Match`返回是一个校验码。
+
+`ETag`可以保证每一个资源是唯一的，资源变化都会导致`ETag`变化。
+
+服务器根据浏览器上送的`If-None-Match`值来判断是否命中缓存。
+
+当服务器返回`304` `Not Modified`的响应时，由于`ETag`重新生成过，`responese header`还会把这个`ETag`返回,，即使这个`ETag`跟之前的没有变化。
+
+#### 3.2 Last-Modified 和 if-modified-since
+
+浏览器第一次请求一个资源的时候，服务器返回的`header`中会加上`Last-Modify`，`Last-Modify`是一个时间标识该资源的最后修改时间，例如`Last-Modify: Thu,31 Dec 2037 23:59:59 GMT`。
+
+当浏览器再次请求该资源时，`request`的请求头中会包含`if-modified-since`，该值为缓存之前返回的`Last-Modify`。
+
+服务器收到`if-modified-since`后，根据资源的最后修改时间判断是否命中缓存。如果命中缓存，则返回`304`，并且不会返回资源内容，并且不会返回`Last-Modify`。
 
 ### 4. 补充
 
