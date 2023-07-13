@@ -16,6 +16,16 @@
 
 强缓存可以通过设置`Expires`和`Cache-Control`来实现。
 
+`Expires`是`http1.0`的规范，`Cache-Control`是在`http1.1`中出现的，我们这里使用`Cache-Control`示范。
+
+`Cache-Control`有一些常设置的值：
+
+- `private`: 仅浏览器可以缓存（默认值）
+- `public`: 浏览器和代理服务器都可缓存
+- `max-age=xxx`: 缓存的内容将在 xxx 秒后失效 
+- `no-cache`: 不进行强缓存
+- `no-store`: 不强缓存，也不协商缓存
+
 ### 3. 协商缓存
 
 当请求资源时，如果是之前请求过的并使用协商缓存，还是发送请求到服务器。
