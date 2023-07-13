@@ -14,7 +14,7 @@
 
 过期了将重新从服务器获取，并再次强缓存。
 
-强缓存可以通过设置`Expires`和`Cache-Control`来实现。
+强缓存是利用`http头`中的`Expires`和`Cache-Control`两个字段来控制的。
 
 `Expires`是`http1.0`的规范，`Cache-Control`是在`http1.1`中出现的，我们这里使用`Cache-Control`示范。
 
@@ -34,7 +34,9 @@
 
 如果经过判断确认资源`被修改过`，则重新发送资源到客户端，并且客户端更新缓存。
 
-协商缓存可以通过设置`Last-Modified`和`Etag`来实现。
+主要涉及到两组`header`字段：`Etag`和`If-None-Match`、`Last-Modified`和`if-modified-since`。
+
+https://www.jb51.net/article/251857.htm
 
 ### 4. 补充
 
